@@ -1,0 +1,24 @@
+Aacha Question
+
+class Compute {
+    
+    public long[] printFirstNegativeInteger(long A[], int N, int K)
+    {
+        int ws=0;
+        int q=0;
+        long[] ans= new long[N-K+1]; 
+        ArrayList<Long> l = new ArrayList<>();
+        for(int we=0;we<A.length;we++){
+            if(A[we]<0) l.add(A[we]);
+            if(we-ws+1 == K){
+                if(l.isEmpty()) ans[q++]=0;
+                else{
+                    ans[q++]=l.get(0);
+                    if(A[ws]==l.get(0)) l.remove(0);
+                }
+                ws++;
+            }
+        }
+        return ans;
+    }
+}

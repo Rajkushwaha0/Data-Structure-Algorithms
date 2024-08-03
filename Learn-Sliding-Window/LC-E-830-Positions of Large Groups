@@ -1,0 +1,37 @@
+class Solution {
+    public List<List<Integer>> largeGroupPositions(String s) {
+        int n = s.length()-1;
+        List<List<Integer>> ans = new ArrayList<>();
+        List<Integer> add = new ArrayList<>();
+        if(s.length()==1) return ans;
+        int ws=0;
+        int we=0;
+        while(we<n){
+            char ch = s.charAt(we);
+            char ch1 = s.charAt(we+1);
+            if(ch!=ch1){
+                if(we-ws+1 >=3) {
+                    add=new ArrayList<>();
+                    add.add(ws);
+                    add.add(we);
+                    ans.add(add);
+                }
+                ws=we+1;
+                we=we+1;
+            }
+            if(ch==ch1){
+                we++;
+            }
+
+            if(we == n-1){
+                if(s.charAt(n) == s.charAt(n-1) && s.charAt(n) == s.charAt(ws) && (n-ws+1)>=3){
+                    add=new ArrayList<>();
+                    add.add(ws);
+                    add.add(n);
+                    ans.add(add);
+                }
+            }
+        }
+        return ans;
+    }
+}

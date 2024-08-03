@@ -1,0 +1,18 @@
+class Solution {
+    public int minimumCardPickup(int[] cards) {
+        
+         int ws=0;
+          int ans=Integer.MAX_VALUE;
+         HashMap<Integer,Integer> hm = new HashMap<>();
+         for(int we=0;we<cards.length;we++){
+             if(hm.containsKey(cards[we])){
+                 ans=Math.min(we-hm.get(cards[we])+1,ans);
+               }
+            else{
+                hm.put(cards[we],we);
+            }
+        }
+        if(ans==Integer.MAX_VALUE) return -1;
+        return ans;
+    }
+}

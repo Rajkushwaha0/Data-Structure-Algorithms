@@ -1,0 +1,17 @@
+class Solution {
+    public int totalFruit(int[] fru) {
+        HashMap<Integer,Integer> hm = new HashMap<>();
+        int ws=0;
+        int ans=0;
+        for(int we=0;we<fru.length;we++){
+            hm.put(fru[we],hm.getOrDefault(fru[we],0)+1);
+            if(hm.size()>2){
+                hm.put(fru[ws],hm.get(fru[ws])-1);
+                if(hm.get(fru[ws])==0) hm.remove(fru[ws]);
+                ws++;
+            }
+            ans=Math.max(ans,we-ws+1);
+        }
+        return ans;
+    }
+}

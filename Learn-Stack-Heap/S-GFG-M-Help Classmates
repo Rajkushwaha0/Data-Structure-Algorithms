@@ -1,0 +1,20 @@
+class Solution {
+	public static int[] help_classmate(int arr[], int n) 
+	{ 
+	    // Your code goes here
+	    Stack<Integer> s = new Stack<>();
+	    int[] ans=new int[n];
+	    s.push(arr[n-1]);
+	    ans[n-1]=-1;
+	    if(arr.length==1) return new int[]{-1};
+	    for(int i=n-2;i>=0;i--){
+	        while(!s.isEmpty() && s.peek()>=arr[i]){
+	            s.pop();
+	        }
+	        if(s.isEmpty()) ans[i]=-1;
+	        else ans[i]=s.peek();
+	        s.push(arr[i]);
+	    }
+	    return ans;
+	} 
+}

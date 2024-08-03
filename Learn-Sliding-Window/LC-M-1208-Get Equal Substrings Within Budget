@@ -1,0 +1,27 @@
+class Solution {
+    public int equalSubstring(String s, String t, int k) {
+        
+        int ws=0;
+        int max=0;
+        int sum=0;
+        for(int we=0;we<s.length();we++){
+            char ch = s.charAt(we);
+            char ch1 = t.charAt(we);
+            int n=ch-'a';
+            int m =ch1-'a';
+            sum+=Math.abs(n-m);
+            if(sum<=k) max=Math.max(max,we-ws+1);
+            if(sum>k){
+                char ch2 = s.charAt(ws);
+                char ch3 = t.charAt(ws);
+                int a=ch2-'a';
+                int b=ch3-'a';
+                sum-=Math.abs(a-b);
+                ws++;
+            }
+            
+
+        }   
+        return max;     
+    }
+}

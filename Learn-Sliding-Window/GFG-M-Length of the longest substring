@@ -1,0 +1,24 @@
+class Solution{
+    int longestUniqueSubsttr(String s){
+        HashMap<Character,Integer> hm = new HashMap<>();
+        int ws=0;
+        int ans=0;
+        for(int we=0;we<s.length();we++){
+            char ch = s.charAt(we);
+            if(!hm.containsKey(ch)){
+                hm.put(ch,we);
+                ans=Math.max(ans,we-ws+1);
+            }
+            else{
+                while(hm.containsKey(ch)){
+                    char ch1= s.charAt(ws);
+                    hm.remove(ch1);
+                    ws++;
+                }
+                hm.put(ch,we);
+            }
+            
+        }
+        return ans;
+    }
+}

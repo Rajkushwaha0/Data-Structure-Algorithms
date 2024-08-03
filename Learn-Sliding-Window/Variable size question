@@ -1,0 +1,79 @@
+//Question-1
+//subarray of almost k sum 
+class Ideone
+{
+	public static void main (String[] args) throws java.lang.Exception
+	{
+		// your code goes here
+		int[] arr={1,11,2,3,15};
+		int k = 10;
+		int ws=0;
+		int wsum=0;
+		int ans=0;
+		for(int we=0;we<arr.length;we++){
+			wsum+=arr[we];
+			while(ws<=we && wsum>k){
+				wsum-= arr[ws];
+				ws++;
+			}
+			if(wsum<=k && sum!=0) ans+= (we-ws+1);
+		}
+		System.out.print(ans);
+	}
+}
+
+
+
+//Question-2
+//subarray of k sum 
+class Ideone
+{
+	public static void main (String[] args) throws java.lang.Exception
+	{
+		// your code goes here
+		
+ 
+ 
+		int[] arr={1,10,2,3,7,15};
+		int k = 10;
+		int ws=0;
+		int wsum=0;
+		int ans=0;
+		for(int we=0;we<arr.length;we++){
+			wsum+=arr[we];
+			while(ws<=we && wsum>k){
+				wsum-= arr[ws];
+				ws++;
+			}
+			if(wsum==k) ans++;
+		}
+		System.out.print(ans);
+	}
+}
+
+
+
+
+//Question-3
+//subarray of atleast k sum 
+class Ideone
+{
+	public static void main (String[] args) throws java.lang.Exception
+	{
+		// your code goes here
+		int[] arr={1,11,2,3,15};
+		int k = 10;
+		int ws=0;
+		int wsum=0;
+		int ans=0;
+		for(int we=0;we<arr.length;we++){
+			wsum+=arr[we];
+			while(ws<=we && wsum>=k){
+				ans+= (arr.length-we);
+				wsum-= arr[ws];
+				ws++;
+			}
+		}
+		System.out.print(ans);
+	}
+}

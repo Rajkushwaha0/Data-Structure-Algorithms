@@ -1,0 +1,70 @@
+class Solution {
+    public boolean checkInclusion(String s1, String s2) {
+        if(s1.length()>s2.length()) return false;
+        if(s1.length()== s2.length()) return valid(s1,s2);
+        HashMap <Character,Integer> hm = new HashMap<>();
+        for(int i=0;i<s1.length();i++){
+            char ch=s1.charAt(i);
+            hm.put(ch,hm.getOrDefault(ch,0)+1);
+        }
+        HashMap <Character,Integer> hm1 = new HashMap<>();
+        int ws=0 ;
+        for(int we = 0;we<s2.length();we++){
+            char ch1=s2.charAt(we);
+            hm1.put(ch1,hm1.getOrDefault(ch1,0)+1);
+            if(we-ws+1 >= s1.length()){
+                if(we-ws+1 == s1.length()){
+                    if(check(hm,hm1)) return true;
+                }
+                char ch2=s2.charAt(ws);
+                hm1.put(ch2,hm1.get(ch2)-1);
+                if(hm1.get(ch2)==0) hm1.remove(ch2);
+                ws++;
+                
+            } 
+        }
+        return false;
+    }
+    public boolean check(HashMap<Character,Integer> h ,HashMap<Character,Integer> h1){
+        // boolean flag=true;
+        // for(Character c : h.keySet()){
+        //     if(h1.containsKey(c)){
+        //         if(h.get(c)==h1.get(c)){
+        //             flag=true;
+        //         }
+        //         else {
+        //             flag=false;
+        //             break;
+        //         }
+        //     }
+        //     else{
+        //         flag=false;
+        //         break;
+        //     }
+        // }
+        // return flag;
+        for (Map.Entry<Character, Integer> entry : h.entrySet()) {
+            char ch = entry.getKey();
+            int cnt = entry.getValue();
+            if (!h1.containsKey(ch) || (cnt != h1.get(ch))) {
+                return false;
+            }
+        }
+
+        return true;
+    }
+    public boolean valid(String s, String t) {
+        if(s.length() != t.length()) return false;
+        HashMap<Character , Integer> hm = new HashMap<>();
+        HashMap<Character , Integer> hm1 = new HashMap<>();
+        for(int i=0;i<s.length();i++) {
+        hm.put(s.charAt(i),hm.getOrDefault(s.charAt(i),0)+1);
+        hm1.put(t.charAt(i),hm1.getOrDefault(t.charAt(i),0)+1);
+        }
+        for(Character c : hm.keySet()){
+            if(!hm1.containsKey(c) || hm.get(c)!=hm1.get(c)) return false;
+        }
+        return true;
+    }
+    
+}

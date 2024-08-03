@@ -1,0 +1,23 @@
+class Solution {
+    public long maximumSubarraySum(int[] nums, int k) {
+        HashMap<Integer,Integer> hm = new HashMap<>();
+        int ws=0;
+        long ans=0;
+        long wsum=0;
+        for(int we=0;we<nums.length;we++){
+            wsum+=nums[we];
+            hm.put(nums[we],hm.getOrDefault(nums[we],0)+1);
+            if(we-ws+1>=k){
+                if(hm.size()==k){
+                    ans=Math.max(ans,wsum);
+                }
+                wsum-=nums[ws];
+                hm.put(nums[ws],hm.get(nums[ws])-1);
+                if(hm.get(nums[ws])==0) hm.remove(nums[ws]);
+                ws++;
+            }
+        }
+        return ans;
+        
+    }
+}

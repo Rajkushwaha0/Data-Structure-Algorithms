@@ -1,0 +1,20 @@
+
+class Solution {
+    public int minSetSize(int[] arr) {
+        int n=arr.length/2;
+        HashMap<Integer,Integer> s = new HashMap<>();
+        for(int i=0;i<arr.length;i++){
+            s.put(arr[i],s.getOrDefault(arr[i],0)+1);
+        }
+        if(s.size()==1) return 1;
+        PriorityQueue<Map.Entry<Integer,Integer>> max = new PriorityQueue<>((e1,e2)-> e2.getValue()-e1.getValue());
+        max.addAll(s.entrySet());
+        int l=arr.length;
+        int c=0;
+        while(l>n){
+            l-=max.poll().getValue();
+            c++;
+        }
+         return c;
+    }
+}

@@ -1,0 +1,21 @@
+class Solution {
+    public int divisorSubstrings(int num, int k) {
+        String s=String.valueOf(num);
+        int ws=0;
+        String s1="";
+        int ans=0;
+        for(int we=0;we<s.length();we++){
+            s1+= s.charAt(we);
+            if(s1.length()>k){
+                s1=s1.substring(1);
+                ws++;
+            }
+            if(s1.length()==k){
+                int m = Integer.valueOf(s1);
+                if(m!=0 && num%m==0) ans++;
+            }
+
+        }
+        return ans;
+    }
+}

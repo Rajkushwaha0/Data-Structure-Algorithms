@@ -1,0 +1,18 @@
+class Solution {
+    public boolean findSubarrays(int[] nums) {
+        int count=0;
+        int wsum=0;
+        HashMap<Integer,Integer> hm = new HashMap<>();
+        int ws=0;
+        for(int we=0;we<nums.length;we++){
+            wsum+=nums[we];
+            while(we-ws+1 >= 2){
+                if((we-ws+1==2) && (hm.containsKey(wsum))) return true;
+                hm.put(wsum,1);
+                wsum-=nums[ws];
+                ws++;
+            }
+        }
+        return false;
+    }
+}

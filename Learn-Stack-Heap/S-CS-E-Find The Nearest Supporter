@@ -1,0 +1,22 @@
+public class Solution
+{
+	public static ArrayList<Integer> prevSmall(ArrayList<Integer> arr, int n)
+	{
+		// Write Your Code Here.
+		ArrayList<Integer> ans = new ArrayList<>();
+		Stack<Integer> s = new Stack<>();
+		s.add(arr.get(0));
+		ans.add(-1);
+
+		for(int i = 1;i<arr.size();i++){
+			while(!s.isEmpty() && arr.get(i)<=s.peek()){
+				s.pop();
+			}
+			// System.out.print(s);
+			if(s.size()==0) ans.add(-1);
+			else ans.add(s.peek());
+			s.add(arr.get(i));
+		}
+		return ans;
+	}
+}

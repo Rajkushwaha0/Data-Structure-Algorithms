@@ -1,0 +1,34 @@
+//Optimize
+
+class Solution {
+    public List<Integer> findAnagrams(String s, String p) {
+        List<Integer> ans =new ArrayList<>();
+        int[] count = new int[26];
+        int[] check = new int[26];
+        int k = p.length();
+        for(int i=0;i<p.length();i++){
+            char ch=p.charAt(i);
+            count[ch-'a'] += 1;
+        }
+        int ws=0;
+        for(int we=0;we<s.length();we++){
+            char ch1=s.charAt(we);
+            check[ch1-'a'] +=1;
+            if(we-ws+1 >= k){
+                if(we-ws+1 == k){
+                   if(solve(check,count)==true) ans.add(ws); 
+                }
+                char ch2=s.charAt(ws);
+                check[ch2-'a'] -=1;
+                ws++;
+            }
+        }
+        return ans;
+    }
+    public boolean solve(int[] a , int[] b){
+        for(int i=0;i<b.length;i++){
+            if(b[i] != a[i]) return false;
+        }
+        return true;
+    }
+}

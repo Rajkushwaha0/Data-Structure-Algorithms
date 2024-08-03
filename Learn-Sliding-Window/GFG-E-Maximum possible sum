@@ -1,0 +1,29 @@
+class Solution
+{
+    long returnMaxSum(long A[], long B[],int N)
+    {
+        // Your code geos here
+        long sum=0;
+        int ws=0;
+        long max=0;
+        HashMap<Long,Long> hm = new HashMap<>();
+        for(int we=0;we<N;we++){
+            sum+=B[we];
+            if(hm.containsKey(A[we])){
+                while(hm.containsKey(A[we])){
+                    hm.remove(A[ws]);
+                    sum-=B[ws];
+                    ws++;
+                }
+                hm.put(A[we],B[we]);
+                
+            }
+            else{
+                hm.put(A[we],B[we]);
+            }
+            max=Math.max(max,sum);
+        }
+        return max;
+        
+    }
+}

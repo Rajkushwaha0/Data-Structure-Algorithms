@@ -1,0 +1,15 @@
+PriorityQueue<Integer> min = new PriorityQueue<>((a,b)->a-b);
+        int[] arr={6,5,3,2,8,10,9};
+        int k=3;
+        int[] ans=new int[arr.length];
+        int index=0;
+        for(int i=0;i<arr.length;i++){
+            min.add(arr[i]);
+            if(min.size()>k) {
+                ans[index++] = min.poll();
+            }
+        }
+        while(!min.isEmpty()){
+            ans[index++]= min.poll();
+        }
+        System.out.println(Arrays.toString(ans));

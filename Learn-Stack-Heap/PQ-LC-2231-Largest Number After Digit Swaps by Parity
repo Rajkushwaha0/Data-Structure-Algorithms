@@ -1,0 +1,23 @@
+class Solution {
+    public int largestInteger(int num) {
+        PriorityQueue<Integer> pq = new PriorityQueue<>();
+        PriorityQueue<Integer> pq1 = new PriorityQueue<>();
+        int n =num;
+        while(num!=0){
+            int m=num%10;
+            if(m%2==0) pq.add(m);
+            else pq1.add(m);
+            num/=10;
+        }
+        StringBuilder s = new StringBuilder();
+        while(n!=0){
+            int b=n%10;
+            
+            if(b%2==0) s.append(pq.poll());
+            else s.append(pq1.poll());
+            n/=10;
+        }
+        s.reverse();
+        return Integer.valueOf(s.toString());
+    }
+}

@@ -1,0 +1,30 @@
+class Solution {
+    public int maxVowels(String s, int k) {
+        HashMap<Character,Integer> hm = new HashMap<>();
+        int ws=0;
+        int max1=Integer.MIN_VALUE;
+        for(int we=0;we<s.length();we++){
+            int max=0;
+            char ch = s.charAt(we);
+            if(ch=='a' || ch=='e' || ch== 'u' || ch== 'i' || ch=='o') {
+                hm.put(ch,hm.getOrDefault(ch,0)+1);
+            }
+           
+            if(we-ws+1 > k){
+                char left=s.charAt(ws);
+                if(left=='a' || left=='e' || left== 'u' || left== 'i' || left=='o'){
+                    hm.put(left,hm.get(left)-1);
+                    if(hm.get(left)==0) hm.remove(left);
+                }
+                ws++;
+            }
+            if(we-ws+1 == k){
+                for(char c : hm.keySet()){
+                    max+=hm.get(c);
+                }
+            }
+            max1=Math.max(max1,max);
+        }
+        return max1;
+    }
+}

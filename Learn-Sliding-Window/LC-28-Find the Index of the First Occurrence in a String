@@ -1,0 +1,28 @@
+class Solution {
+    public int strStr(String a, String b) {
+        if(a.length()<b.length()){
+            return -1;
+        }
+        int n=b.length();
+        int ws=0;
+        for(int we=0;we<a.length();we++){
+            if(we-ws+1 > n){
+                ws++;
+            }
+            if(we-ws+1==n){
+                if(check(a,b,ws,we)==true) return ws;
+            }
+        }
+        return -1;
+    }
+    public boolean check(String a, String b , int ws , int we){
+        int i=0;
+        for(int k= ws;k<=we;k++){
+            char c=a.charAt(k);
+            char d=b.charAt(i);
+            if(c!=d) return false;
+            i++;
+        }
+        return true;
+    }
+}

@@ -1,0 +1,42 @@
+class Solution{
+    static List<Integer> leftSmaller(int n, int a[])
+    {
+        //code here
+        List<Integer> ans= new ArrayList<>();
+        Stack<Integer> s = new Stack<>();
+        s.push(a[0]);
+        ans.add(-1);
+        
+        for(int i = 1;i<a.length;i++){
+            // if(a[i]==s.peek()){
+            //     ans.add(ans.get(ans.size()-1));
+            // }
+            // else if(a[i]<s.peek()){
+            //     while(!s.isEmpty() && a[i]<s.peek()) {
+            //         s.pop();
+            //     }
+            //     if(s.isEmpty()){
+            //         ans.add(-1);
+            //     }
+            //     else ans.add(s.peek());
+            // }
+            // else if(a[i]>s.peek()){
+            //     ans.add(s.peek());
+            // }
+            // s.push(a[i]);
+            while (!s.isEmpty() && s.peek() >= a[i]) {
+                s.pop();
+            }
+
+            if (s.isEmpty()) {
+                ans.add(-1);
+            } else 
+            {
+                ans.add(s.peek());
+            }
+            s.push(a[i]);
+        }
+        
+        return ans;
+    }
+}

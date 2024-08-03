@@ -1,0 +1,22 @@
+class Solution {
+    public int minimumDifference(int[] nums, int k) {
+        // if(nums.length==1 && k==1){
+        //     return 0;
+        // }
+        Arrays.sort(nums);
+        int min=Integer.MAX_VALUE;
+        int ws=0;
+        int m=nums[0];
+        for(int i=1;i<nums.length;i++){
+            
+            m=nums[i]-nums[ws];
+            if(i-ws+1 >= k){
+                if(i-ws+1 == k) min=Math.min(min,m);
+                m+=nums[ws];
+                ws++;
+            }
+        }
+        if(min==Integer.MAX_VALUE) return 0;
+        return min;
+    }
+}

@@ -1,0 +1,24 @@
+class Solution
+{
+    ArrayList<Integer> countDistinct(int A[], int n, int k)
+    {
+        // code here 
+        ArrayList<Integer> l = new ArrayList<>();
+        HashMap<Integer,Integer> hm = new HashMap<>();
+        int ws=0;
+        for(int we=0;we<A.length;we++){
+            hm.put(A[we],hm.getOrDefault(A[we],0)+1);
+            if(we-ws+1>=k){
+                if(we-ws+1==k){
+                l.add(hm.size());
+                }
+                hm.put(A[ws],hm.get(A[ws])-1);
+                if(hm.get(A[ws])==0){
+                    hm.remove(A[ws]);
+                }
+                ws++;
+            }
+        }
+        return l;
+    }
+}
