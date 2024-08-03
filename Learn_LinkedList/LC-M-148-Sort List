@@ -1,0 +1,23 @@
+class Solution {
+    public ListNode sortList(ListNode head) {
+        if(head==null) return null;
+        List<Integer> l = new ArrayList<>();
+        PriorityQueue<Integer> pq = new PriorityQueue<>((a,b)->a-b);
+        while(head!=null) {
+            pq.offer(head.val);
+            head=head.next;
+        }
+        // System.out.print(pq);
+        ListNode dummy = new ListNode(pq.poll());
+        ListNode temp = dummy;
+        while(!pq.isEmpty()){
+            ListNode temp1 = new ListNode(pq.poll());
+            dummy.next= temp1;
+            dummy=dummy.next;
+        }
+        dummy.next=null;
+        
+        return temp;
+        
+    }
+}

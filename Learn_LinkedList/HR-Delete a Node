@@ -1,0 +1,15 @@
+public static SinglyLinkedListNode deleteNode(SinglyLinkedListNode llist, int position) {
+    // Write your code here
+    if(position==0){
+        return llist.next;
+    }
+    SinglyLinkedListNode temp=null;
+    SinglyLinkedListNode curr=llist;
+    int i=0;
+    while(i++ < position){
+       temp=curr;
+       curr=curr.next; 
+    }
+    temp.next=temp.next.next;
+    return llist;
+    }

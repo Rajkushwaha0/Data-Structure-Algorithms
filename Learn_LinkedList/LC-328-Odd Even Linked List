@@ -1,0 +1,37 @@
+class Solution {
+    public ListNode oddEvenList(ListNode head) {
+        // ArrayList<Integer> l = new ArrayList<>();
+        // ListNode temp = head;
+        // while(temp!=null){
+        //     l.add(temp.val);
+        //     temp=temp.next;
+        // }
+        // int k = l.size() - (l.size()/2);
+        // ListNode result = head;
+        // for(int i=0;i<l.size();i++){
+        //     if(i%2==0) {
+        //         result.val = l.get(i);
+        //         result=result.next;
+        //     }
+        // }
+        // for(int j=1;j<l.size();j++){
+        //     if(j%2==1){
+        //     result.val = l.get(j);
+        //     result=result.next;
+        //     }
+        // }
+        // return head;
+        if(head==null) return head; 
+        ListNode odd = head;
+        ListNode even = head.next;
+        ListNode evenhead= head.next;
+        while(odd.next!=null && even.next!=null){
+            odd.next= odd.next.next;
+            even.next=even.next.next;
+            odd=odd.next;
+            even=even.next;
+        }
+        odd.next=evenhead;
+        return head;
+    }
+}

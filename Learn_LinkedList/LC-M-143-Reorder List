@@ -1,0 +1,43 @@
+class Solution {
+    public void reorderList(ListNode head) {
+        
+        if(head== null || head.next == null) return ;
+        ListNode curr= head;
+        List<Integer> l = new ArrayList<>();
+        List<Integer> l1 = new ArrayList<>();
+        while(curr!=null){
+            l.add(curr.val);
+            curr= curr.next;
+        }
+        int i=0;
+        int j = len(head)-1;
+        while(i<=j){
+            if(i!=j){
+                l1.add(l.get(i));
+                l1.add(l.get(j));
+            }
+            else{
+                l1.add(l.get(i));
+            }
+            i++;
+            j--;
+        }
+        i=0;
+        while(head!=null){
+            head.val = l1.get(i);
+            head=head.next;
+            i++;
+            
+        }
+        return ;
+        
+    }
+    public int len(ListNode node){
+        int c=0;
+        while(node!=null){
+            c++;
+            node=node.next;
+        }
+        return c;
+    }
+}

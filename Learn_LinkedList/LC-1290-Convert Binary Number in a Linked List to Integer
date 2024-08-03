@@ -1,0 +1,12 @@
+class Solution {
+    public int getDecimalValue(ListNode head) {
+        String s="";
+        ListNode curr=head;
+        while(curr!=null){
+            s+=String.valueOf(curr.val);
+            curr=curr.next;
+        }
+        int m=Integer.parseInt(s, 2);
+        return m;
+    }
+}

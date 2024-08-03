@@ -1,0 +1,44 @@
+class Solution {
+    public int pairSum(ListNode head) {
+        Stack<ListNode> s = new Stack<>();
+        ListNode slow=head;
+        ListNode fast=head;
+        while(fast!=null){
+            s.add(slow);
+            slow=slow.next;
+            fast=fast.next.next;
+        }
+        int max= 0;
+        while(slow!=null && !s.isEmpty()){
+            ListNode temp = s.pop();
+            max= Math.max(max,(temp.val+slow.val));
+            slow=slow.next;
+        }
+        return max;
+
+    }
+}
+
+
+
+
+class Solution {
+    public int pairSum(ListNode head) {
+        ArrayList<Integer> l = new ArrayList<>();
+        ListNode temp=head;
+        while(temp!=null){
+            l.add(temp.val);
+            temp=temp.next;
+        }
+        int max=0;
+        int j=l.size()-1;
+        int i=0;
+        while(i<j){
+            int sum=l.get(i)+l.get(j);
+            max=Math.max(max,sum);
+            i++;
+            j--;
+        }
+        return max;
+    }
+}

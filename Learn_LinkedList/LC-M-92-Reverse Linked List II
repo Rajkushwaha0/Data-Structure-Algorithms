@@ -1,0 +1,28 @@
+class Solution {
+    public ListNode reverseBetween(ListNode head, int left, int right) {
+        int i=1;
+        ListNode node = head;
+        List<Integer> l = new ArrayList<>();
+        while(node!=null){
+            if(i>=left && i<=right){
+                l.add(0,node.val);
+            }
+            i++;
+            node=node.next;
+        }
+
+        int j=1,k=0;
+        ListNode node1=head;
+        while(node1!=null){
+            if(j>=left && j<=right){
+                node1.val=l.get(k);
+                k++;
+            }
+            node1=node1.next;
+            j++;
+        }
+
+        return head;
+        
+    }
+}
