@@ -1,0 +1,17 @@
+class Solution {
+    public int countWords(String[] words1, String[] words2) {
+        HashMap<String,Integer> hm = new HashMap<>();
+        HashMap<String,Integer> hm1 = new HashMap<>();
+        int ans=0;
+        for (String s : words1){
+            hm.put(s,hm.getOrDefault(s,0)+1);
+        }
+        for(String s1:words2){
+            hm1.put(s1,hm1.getOrDefault(s1,0)+1);
+        }
+        for(String s3 : hm.keySet()){
+            if(hm.get(s3)==1 && (hm1.containsKey(s3) && hm1.get(s3)==1) ) ans++;
+        }
+        return ans;
+    }
+}

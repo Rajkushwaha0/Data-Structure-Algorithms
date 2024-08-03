@@ -1,0 +1,20 @@
+class Solution {
+    public String oddString(String[] words) {
+        HashMap<ArrayList<Integer> , Integer> hm = new HashMap<>();
+        HashMap<String , ArrayList<Integer>> hm1 = new HashMap<>();
+        for(String e : words){
+            ArrayList<Integer> l = new ArrayList<>();
+            for(int j=0;j<e.length()-1;j++){
+                char ch=e.charAt(j);
+                char ch1=e.charAt(j+1);
+                l.add((ch1-'a')-(ch-'a'));
+            }
+            hm1.put(e,l);
+            hm.put(l,hm.getOrDefault(l,0)+1);
+        }
+        for(String f : hm1.keySet()){
+            if(hm.get(hm1.get(f))==1) return f;
+        }
+        return "";
+    }
+}

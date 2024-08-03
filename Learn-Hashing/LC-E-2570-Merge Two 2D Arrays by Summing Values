@@ -1,0 +1,24 @@
+class Solution {
+    public int[][] mergeArrays(int[][] nums1, int[][] nums2) {
+        TreeMap<Integer,Integer> hm = new TreeMap<>();
+        PriorityQueue<Integer> pq = new PriorityQueue<>();
+        for(int i=0;i<nums1.length;i++){
+            hm.put(nums1[i][0],nums1[i][1]);
+        }
+        for(int i=0;i<nums2.length;i++){
+            hm.put(nums2[i][0],hm.getOrDefault(nums2[i][0],0)+nums2[i][1]);
+        }
+
+        int[][] ans = new int[hm.size()][2];
+        int j=0 ;
+        for(int i:hm.keySet()){
+            ans[j][0]=i;
+            ans[j][1]=hm.get(i);
+            j++;
+        }
+
+        
+        return ans;
+        
+    }
+}

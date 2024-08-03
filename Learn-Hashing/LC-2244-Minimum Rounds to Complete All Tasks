@@ -1,0 +1,16 @@
+class Solution {
+    public int minimumRounds(int[] tasks) {
+        HashMap<Integer,Integer> hm = new HashMap<>();
+        for(int i=0;i<tasks.length;i++){
+            hm.put(tasks[i],hm.getOrDefault(tasks[i],0)+1);
+        }
+        int ans=0;
+        for(int i : hm.keySet()){
+            int a=hm.get(i);
+            if(a<=1) return -1;
+            if(a%3==0) ans+=a/3;
+            else ans+=a/3+1;
+        }
+        return ans;
+    }
+}

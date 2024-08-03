@@ -1,0 +1,26 @@
+class Solution {
+    public List<Integer> relocateMarbles(int[] nums, int[] moveFrom, int[] moveTo) {
+        Map<Integer,Integer> hm = new HashMap<>();
+        for(int i : nums){
+            hm.put(i,1);
+        }
+        
+        int n = moveFrom.length;
+        int i=0;
+        while(n!=0){
+                hm.remove(moveFrom[i]);
+                hm.put(moveTo[i],1);
+            i++;
+            n--;
+        }
+        List<Integer> ans = new ArrayList<>();
+        for(int k:hm.keySet()){
+            for(int j=0;j<hm.get(k);j++){
+                ans.add(k);
+            }
+        }
+        Collections.sort(ans);
+        return ans;
+        
+    }
+}

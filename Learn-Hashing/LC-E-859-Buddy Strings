@@ -1,0 +1,34 @@
+class Solution {
+    public boolean buddyStrings(String s, String goal) {
+        if(s.length()!=goal.length()) return false;
+        HashMap<Character,Integer> hm = new HashMap<>();
+        for(char ch : s.toCharArray()){
+            hm.put(ch,hm.getOrDefault(ch,0)+1);
+        }
+        if(s.equals(goal)){
+            for(char ch:hm.keySet()){
+                if(hm.get(ch)>1){
+                    return true;
+                }
+            }
+            return false;
+        }
+        else{
+            ArrayList<Integer> in = new ArrayList<>();
+            for(int i=0;i<s.length();i++){
+                char ch = s.charAt(i);
+                char ch1 = goal.charAt(i);
+                if(ch!= ch1 && hm.containsKey(ch1)) in.add(i);
+            }
+            if(in.size()==2){
+                    StringBuilder s1 = new StringBuilder(s);
+                    char ch2 = s1.charAt(in.get(0));
+                    s1.setCharAt(in.get(0),s1.charAt(in.get(1)));
+                    s1.setCharAt(in.get(1),ch2);
+                    System.out.print(s1);
+                    if(s1.toString().equals(goal)) return true;
+            } 
+        }
+        return false;
+    }
+}

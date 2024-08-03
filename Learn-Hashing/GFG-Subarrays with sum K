@@ -1,0 +1,17 @@
+class Solution
+{
+    static int findSubArraySum(int Arr[], int N, int k)
+    {
+        // code here
+        HashMap<Integer,Integer> hm = new HashMap<>();
+        int wsum=0;
+        int ans=0;
+        for(int i=0;i<N;i++){
+            wsum+=Arr[i];
+            if(wsum==k) ans++;
+            if(hm.containsKey(wsum-k)) ans+=hm.get(wsum-k);
+            hm.put(wsum,hm.getOrDefault(wsum,0)+1);
+        }
+        return ans;
+    }
+}

@@ -1,0 +1,27 @@
+class Solution {
+    public int countCharacters(String[] words, String chars) {
+        HashMap<Character,Integer> hm = new HashMap<>();
+        for(int i =0;i<chars.length();i++){
+            char ch=chars.charAt(i);
+            hm.put(ch,hm.getOrDefault(ch,0)+1);
+        }
+        int ans=0;
+        for(int j=0;j<words.length;j++){
+            boolean flag=true;
+            HashMap<Character,Integer> hm1 = new HashMap<>();
+            for(int k = 0;k<words[j].length();k++){
+                char ch1=words[j].charAt(k);
+                hm1.put(ch1,hm1.getOrDefault(ch1,0)+1);
+                if(hm.containsKey(ch1) && hm.get(ch1)>=hm1.get(ch1)){
+                    flag=true;
+                }
+                else{
+                    flag=false;
+                    break;
+                }
+            }
+            if(flag==true) ans+=words[j].length();
+        }
+        return ans;
+    }
+}

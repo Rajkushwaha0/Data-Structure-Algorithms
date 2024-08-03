@@ -1,0 +1,15 @@
+public class Solution {
+    public int solve(ArrayList<Integer> A, int B) {
+        int ans=0;
+        int wxor=0;
+        HashMap<Integer,Integer> hm = new HashMap<>();
+        for(int i=0;i<A.size();i++){
+            wxor^=A.get(i);
+            if(wxor==B) ans++;
+            if(hm.containsKey(wxor^B)) ans+=hm.get(wxor^B);
+            hm.put(wxor,hm.getOrDefault(wxor,0)+1);
+            
+        }
+        return ans;
+    }
+}

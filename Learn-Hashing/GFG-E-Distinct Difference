@@ -1,0 +1,84 @@
+class Solution {
+    public static ArrayList<Integer> getDistinctDifference(int N, int[] a) {
+        // code here
+        /*
+        HashSet<Integer> hm = new HashSet<>();
+        ArrayList<Integer> ans = new ArrayList<>();
+        
+        int j=0;
+        for(int i=0;i<N;i++){
+            
+            if(i==0){
+                j=1;
+                while(j<N){
+                    hm.add(a[j]);
+                    j++;
+                }
+                ans.add( 0-hm.size());
+                hm.clear();
+                continue;
+            }
+            else if(i== N-1){
+                j=0;
+                while(j<N-1){
+                    hm.add(a[j]);
+                    j++;
+                }
+                ans.add(hm.size());
+                hm.clear();
+                continue;
+            }
+            else{
+                j=0;
+                int k=i+1;
+                int left=0;
+                int right=0;
+                while(j<i){
+                    hm.add(a[j]);
+                    j++;
+                }
+                left=hm.size();
+                hm.clear();
+                while(k<N){
+                    hm.add(a[k]);
+                    k++;
+                }
+                ans.add(left-hm.size());
+                hm.clear();
+            }
+        }
+        return ans;
+        */
+        HashMap<Integer, Integer> leftMap = new HashMap<>();
+    HashMap<Integer, Integer> rightMap
+      = new HashMap<>();
+    for (int i = 0; i < N; i++) {
+      rightMap.put(a[i],rightMap.getOrDefault(a[i],0)+1);
+    }
+ 
+    
+    ArrayList<Integer> ans = new ArrayList<>();
+    for (int i = 0; i < N; i++) {
+      int l = leftMap.size();
+      if (rightMap.get(a[i]) > 1) {
+        rightMap.put(a[i],
+                     rightMap.get(a[i]) - 1);
+      }
+      else {
+        rightMap.remove(a[i]);
+      }
+ 
+
+      int r = rightMap.size();
+ 
+      ans.add(l-r);
+ 
+      if (leftMap.containsKey(a[i]))
+        leftMap.put(a[i],
+                    leftMap.get(a[i]) + 1);
+      else
+        leftMap.put(a[i], 1);
+    }
+    return ans;
+    }
+}

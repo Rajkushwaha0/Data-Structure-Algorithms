@@ -1,0 +1,19 @@
+class Solution {
+    public List<String> stringMatching(String[] words) {
+        List<String> list = new ArrayList<>();
+        HashMap<String ,Integer> hm = new HashMap<>();
+        for(int i=0;i<words.length;i++){
+            String s = words[i];
+            for(int j=0;j<words.length;j++){
+                String s1 = words[j];
+                if(s1.contains(s) && i!=j) {
+                    if(!hm.containsKey(s)) {
+                        list.add(s);
+                        hm.put(s,1);
+                    }
+                }
+            }
+        }
+        return list;
+    }
+}

@@ -1,0 +1,50 @@
+class Solution{
+    // A1[] : the input array-1
+    // N : size of the array A1[]
+    // A2[] : the input array-2
+    // M : size of the array A2[]
+    
+    //Function to sort an array according to the other array.
+    public static int[] sortA1ByA2(int A1[], int N, int A2[], int M)
+    {
+        //Your code here
+        int[] ans=new int[N];
+        HashMap<Integer, Integer> mp = new HashMap<>();
+
+        int ind = 0;
+
+        for (int i = 0; i < N; i++) {
+            if (!mp.containsKey(A1[i]))
+                mp.put(A1[i], 1);
+            else
+                mp.put(A1[i], mp.get(A1[i]) + 1);
+        }
+
+        for (int i = 0; i < M; i++) {
+ 
+
+            if (mp.containsKey(A2[i])) {
+
+                for (int j = 1; j <= mp.get(A2[i]); j++)
+                    ans[ind++] = A2[i];
+            }
+
+            mp.remove(A2[i]);
+        }
+        int[] h=new int[N-ind];
+        int i=0;
+        for (HashMap.Entry<Integer, Integer> it :
+             mp.entrySet()) {
+
+            for (int j = 1; j <= it.getValue(); j++)
+                h[i++] = it.getKey();
+                 
+             }
+        Arrays.sort(h);
+        int f=0;
+        for(int y=ind;y<ans.length;y++){
+            ans[y]=h[f++];
+        }
+        return ans;
+    }
+}

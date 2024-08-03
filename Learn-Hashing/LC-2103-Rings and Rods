@@ -1,0 +1,22 @@
+class Solution {
+    public int countPoints(String rings) {
+        HashMap<Character,List<Character>> hm = new HashMap<>();
+        for(int i=0;i<rings.length();i+=2){
+            char ch=rings.charAt(i);
+            char ch1= rings.charAt(i+1);
+            if(hm.containsKey(ch1)){
+                if(hm.get(ch1).contains(ch)) continue;
+                else hm.get(ch1).add(ch);
+            }
+            else{
+                hm.put(ch1,new ArrayList<>() );
+                hm.get(ch1).add(ch); 
+            }
+        }
+        int ans=0;
+        for(Character c : hm.keySet() ){
+            if(hm.get(c).size()==3) ans++;
+        }
+        return ans;
+    }
+}

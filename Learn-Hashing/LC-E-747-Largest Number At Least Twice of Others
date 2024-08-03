@@ -1,0 +1,21 @@
+class Solution {
+    public int dominantIndex(int[] nums) {
+        HashMap<Integer,Integer> hm = new HashMap<>();
+        int max=0;
+        for(int j: nums){
+            max=Math.max(max,j);
+        }
+        for(int i=0;i<nums.length;i++){
+            if(max==nums[i]) hm.put(max,i);
+            else {
+                int m = nums[i]*2;
+                if(hm.containsKey(m)) continue;
+                else hm.put(m,i);
+            }
+        }
+        for(int k : hm.keySet()){
+            if(k>max) return -1;
+        }
+        return hm.get(max);
+    }
+}

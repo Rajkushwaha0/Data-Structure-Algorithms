@@ -1,0 +1,48 @@
+Brute Force
+
+public static List<Integer> closestNumbers(List<Integer> arr) {
+    // Write your code here
+        List<Integer> ans  = new ArrayList<>();
+        HashMap<List<Integer> , Integer> hm = new HashMap<>();
+        List<Integer> pair  = new ArrayList<>();
+        int max = Integer.MAX_VALUE;
+        for(int i=0;i<arr.size();i++){
+            for(int j=i+1;j<arr.size();j++){
+                int a = Math.abs(arr.get(i)-arr.get(j));
+                pair.add(arr.get(i));
+                pair.add(arr.get(j));
+                hm.put( pair,a);
+                max=Math.min(max,a);
+                pair = new ArrayList<>();
+            }
+        }
+        for(List<Integer> row : hm.keySet()){
+            if(hm.get(row)==max){
+                ans.add(row.get(0));
+                ans.add(row.get(1));
+            }
+        }
+        Collections.sort(ans);
+        return ans;
+
+    }
+    
+    
+    
+    //Optimized 
+    public static List<Integer> closestNumbers(List<Integer> arr) {
+    // Write your code here
+        int n = arr.size();
+        Integer x [] = arr.toArray(new Integer[n]); 
+        List<Integer> L = new ArrayList();  
+        Arrays.sort(x); int min = Integer.MAX_VALUE; 
+        for (int i=1;i<n; i++){ 
+                int abs = Math.abs(x[i]-x[i-1]); 
+                if(abs<min) L.clear(); 
+                min=Math.min(min,abs);  
+                if(abs==min)  
+                L.addAll(Arrays.asList(new Integer[]{x[i-1],x[i]}));
+            } 
+            return L ;
+
+    }
