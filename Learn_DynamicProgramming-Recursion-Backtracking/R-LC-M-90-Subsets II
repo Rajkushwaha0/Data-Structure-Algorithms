@@ -1,0 +1,28 @@
+class Solution {
+    public List<List<Integer>> subsetsWithDup(int[] nums) {
+        List<List<Integer>> ans = new ArrayList<>();
+        List<Integer> output = new ArrayList<>();
+        int index=0;
+        HashMap<List<List<Integer>>,Integer> hm = new HashMap<>();
+        solve(nums, output , index , ans, hm);
+        return ans;
+    }
+    public static void solve(int[] nums, List<Integer> output, int index, List<List<Integer>> ans,HashMap<List<List<Integer>>,Integer> hm){
+        //Base case
+        if(index >= nums.length){
+            Collections.sort(output);
+            if(!hm.containsKey(new ArrayList(output))){
+                hm.put(new ArrayList(output),1);
+                ans.add(new ArrayList(output));
+            }
+            return ;
+        }
+        //Include
+        output.add(nums[index]);
+        solve(nums, output , index+1 , ans , hm);
+        //Exclude
+        output.remove(Integer.valueOf(nums[index]));
+        solve(nums,output,index+1 , ans , hm);
+        
+    }
+}

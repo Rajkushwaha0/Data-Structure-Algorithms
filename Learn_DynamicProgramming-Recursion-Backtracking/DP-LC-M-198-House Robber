@@ -1,0 +1,34 @@
+class Solution {
+    //Memory Optimization
+    public int rob(int[] nums) {
+        int n=nums.length;
+        int[] memo= new int[nums.length];
+        Arrays.fill(memo,-1);
+        return f(0,nums , n , memo);
+        }
+    public int f(int i , int[] nums , int n , int[] memo){
+        int include =0 , exclude=0;
+        if(i>=n) return 0;
+        if(memo[i]!= -1) return memo[i];
+        include = nums[i] + f(i+2,nums,n ,memo);
+        exclude = f(i+1,nums , n ,memo);
+        memo[i]=Math.max(include,exclude);
+        return memo[i];
+    }
+    
+    //Recursive
+//     public int rob(int[] nums) {
+//         int n= nums.length;
+//         if(n==0) return 0;
+//         if(n==1) return nums[0];
+//         return f(nums , 0 , n);
+//     }
+//     public int f(int[] nums , int i , int n){
+//         int include=0 , exclude=0;
+//         if(i>=n) return 0;
+        
+//         include=nums[i]+f(nums,i+2,n);
+//         exclude= f(nums,i+1,n);
+//         return Math.max(include,exclude);
+//    }
+}

@@ -1,0 +1,32 @@
+class Solution {
+    public long mostPoints(int[][] questions) {
+        long[] dp = new long[questions.length];
+        Arrays.fill(dp,-1);
+        return solve(0,questions,dp);
+        
+    }
+    // public long solve(int i , int[][] arr){
+    //     if(i>= arr.length) return 0;
+
+    //     // include 
+    //     long l = arr[i][0]+solve(i+arr[i][1]+1,arr);
+        
+    //     // exclude
+    //     long r = solve(i+1,arr);
+
+    //     return Math.max(l,r);
+    // }
+    public long solve(int i , int[][] arr , long[] dp){
+        if(i>= arr.length) return 0;
+
+        if(dp[i]!= -1) return dp[i];
+
+        // include 
+        long l = arr[i][0]+solve(i+arr[i][1]+1,arr,dp);
+        
+        // exclude
+        long r = solve(i+1,arr,dp);
+
+        return dp[i] = Math.max(l,r);
+    }
+}

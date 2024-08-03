@@ -1,0 +1,28 @@
+class Solution {
+    int findMaxSum(int arr[], int n) {
+        // code here
+        if(n==1) return arr[0];
+        if(n==2){
+            int m=Math.max(arr[0],arr[1]);
+             return m;
+        }
+        int[] dp = new int [n];
+        dp[0]=arr[0];
+        dp[1]=arr[1];
+        int ans=Math.max(dp[0],dp[1]);
+        for(int i=2;i<arr.length;i++){
+            if(i==2){
+                dp[i]=arr[i]+dp[i-2];
+                ans=Math.max(ans,dp[i]); 
+            }
+            else if(i>2){
+                dp[i] = Math.max(arr[i]+dp[i-2],arr[i]+dp[i-3]);
+                ans=Math.max(ans,dp[i]);
+            }
+              
+            
+                
+        }
+        return ans;
+    }
+}

@@ -1,0 +1,75 @@
+class Solution {
+    
+    public int minFallingPathSum(int[][] grid) {
+        int m=grid.length;
+        int n=grid[0].length;
+        int[][] dp = new int[100][100];
+        int ans=Integer.MAX_VALUE;
+        for(int[] j:dp){
+            Arrays.fill(j,-1);
+        }
+        //recursion
+        //for(int i=0;i<m;i++) ans=Math.min(ans,recur(n-1,i,grid));
+        //return ans;
+
+        //memoization
+        //for(int i=0;i<m;i++) ans=Math.min(ans,memoiazation(n-1,i,grid,dp));
+        //return ans;
+
+        //Tabulation
+        return bottomup(grid,m,n);
+    }
+    public static int recur(int i ,int j , int[][] grid){
+        if(j<0 || j>=grid[0].length) return (int)Math.pow(10,7);
+        if(i==0) return grid[0][j];
+        int s = grid[i][j]+recur(i-1,j,grid);
+        int ld = grid[i][j]+recur(i-1,j-1,grid);
+        int rd = grid[i][j]+recur(i-1,j+1,grid);
+
+        return Math.min(s,Math.min(ld,rd));
+    }
+
+    //top down 
+    public static int memoiazation(int i ,int j , int[][] grid ,int dp[][]){
+        if(j<0 || j>=grid[0].length) return (int)Math.pow(10,7);
+        if(i==0) return grid[0][j];
+        if(dp[i][j] != -1) return dp[i][j];
+        int s = grid[i][j]+memoiazation(i-1,j,grid,dp);
+        int ld = grid[i][j]+memoiazation(i-1,j-1,grid,dp);
+        int rd = grid[i][j]+memoiazation(i-1,j+1,grid,dp);
+
+        return dp[i][j]=Math.min(s,Math.min(ld,rd));
+    }
+
+    public static int bottomup(int[][]grid , int m , int n ){
+        int[][] dp = new int[m+1][n+1];
+        //for(int j=0;j<n;j++) dp[0][j]=grid[0][j];
+
+        for(int i=0;i<m;i++){
+            for(int j=0;j<n;j++){
+                if(i==0){
+                    dp[0][j]=grid[0][j];
+                    continue;
+                }
+                int up = (int)Math.pow(10,7),r= (int)Math.pow(10,7), l=(int)Math.pow(10,7);
+                up = grid[i][j]+dp[i-1][j];
+                if(j-1>=0){
+                    r = grid[i][j]+dp[i-1][j-1];
+                }
+                if(j+1<n){
+                    l = grid[i][j]+dp[i-1][j+1];
+                }
+
+                dp[i][j]=Math.min(up,Math.min(l,r));
+            }
+        }
+        int max = dp[m-1][0];
+        for(int k=0;k<n;k++){
+            max=Math.min(max,dp[m-1][k]);
+        }
+        
+        return max;
+
+
+    }
+}

@@ -1,0 +1,29 @@
+import java.security.KeyPair;
+import java.util.*;
+
+public class raj {
+    public static void main(String args[]){
+        Scanner raj = new Scanner(System.in);
+        int[] s={2,5,8,10,11,4,6};
+        int i=0;
+        int target=10;
+        int sum=0;
+        int count=0;
+        check(s,i,sum,target );
+    }
+
+    public static void check(int[] arr,int i,int sum , int t) {
+        int c=0;
+        if(i>=arr.length){
+            if(sum==t) {
+                c++;
+                System.out.println(c);
+            }
+            return ;
+        }
+        sum+=arr[i];
+        check(arr, i+1 , sum , t);
+        sum-=arr[i];
+        check(arr,i+1,sum , t);
+    }
+}
