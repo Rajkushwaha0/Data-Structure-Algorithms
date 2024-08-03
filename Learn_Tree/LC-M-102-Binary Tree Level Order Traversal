@@ -1,0 +1,63 @@
+//This program is written by using separator
+public static void levelDusra(Node5 root){
+        Queue<Node5> q = new LinkedList<>();
+        q.add(root);
+        q.add(null);
+        while(!q.isEmpty()){
+            Node5 temp = q.peek();
+            q.poll();
+
+            if(temp== null) {
+                System.out.println("");
+                if(!q.isEmpty()){
+                    q.add(null);
+                }
+            }
+            else{
+                System.out.print(temp.data+" ");
+                if(temp.left!=null){
+                    q.add(temp.left);
+                }
+                if(temp.right!=null){
+                    q.add(temp.right);
+                }
+            }
+
+
+        }
+
+
+    }
+
+
+
+
+
+class Solution {
+    public List<List<Integer>> levelOrder(TreeNode root) {
+        List<List<Integer>> ans  = new ArrayList<>();
+        if (root == null) {
+            return ans;
+        }
+        Queue<TreeNode> q = new LinkedList<>();
+        q.add(root);
+        while(!q.isEmpty()){
+            int level = q.size();
+            List<Integer> fill = new ArrayList<>();
+            for(int i=0;i<level;i++){
+                TreeNode temp = q.poll();
+                fill.add(temp.val);
+                if(temp.left!=null){
+                    q.add(temp.left);
+                }
+                if(temp.right!=null){
+                    q.add(temp.right);
+                }
+            }
+            ans.add(fill);
+        }
+        return ans;
+        
+    }
+    
+}

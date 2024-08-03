@@ -1,0 +1,33 @@
+class Solution {
+    List<String> res = new ArrayList<>();
+    public int sumRootToLeaf(TreeNode root) {
+        sum(root, "");
+        int count = 0;
+        for(String s : res){
+            count+=Integer.parseInt(s, 2);
+        }
+        
+        return count;
+    }
+    public  Boolean sum(TreeNode root, String str){
+        if(root == null){
+            
+            return false;
+        }
+        if(root.left == null && root.right == null) {
+            str += root.val;
+            res.add(str);
+            return false;
+        }
+        str += ""+ root.val;
+        Boolean left=sum(root.left, str);
+        Boolean right=sum(root.right, str);
+        
+        if(left==false && right==false){
+            str.substring(0,str.length());
+            return false;
+        }
+        return true;
+    }
+
+}

@@ -1,0 +1,35 @@
+class Solution {
+    List<TreeNode> li=new ArrayList<>();
+    int ans=0;
+    public int pathSum(TreeNode root, int targetSum) {
+        if(root==null)return 0;
+        dfs(root);
+        for(int i=0;i<li.size();i++){
+            long sum=0;
+            path(li.get(i),sum,targetSum);
+        }
+        return ans;
+    }
+
+
+    public void dfs(TreeNode root){
+        if(root==null) return ; 
+
+        li.add(root);
+
+        dfs(root.left);
+        dfs(root.right);
+    }
+    public void path(TreeNode root,long sum,int k){
+        if(root==null) return ;
+
+        sum+=root.val;
+        if(sum==tSum) ans++;
+
+        path(root.left,sum,k);
+        path(root.right,sum,k);
+
+        sum-=root.val;
+        return ;
+    }
+}

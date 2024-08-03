@@ -1,0 +1,34 @@
+public static void buildfromlevelorder(Node5 root){
+        Scanner sc = new Scanner(System.in);
+        System.out.println("Enter the root");
+        int d = sc.nextInt();
+        root=new Node5(d);
+        Queue<Node5> q = new LinkedList<>();
+        q.add(root);
+        while (!q.isEmpty()){
+            Node5 temp = q.poll();
+
+            System.out.println("Enter left node value of : "+temp.data);
+            int leftchild = sc.nextInt();
+
+            if(leftchild!= -1) {
+                temp.left = new Node5(leftchild);
+                q.add(temp.left);
+            }
+
+            System.out.println("Enter right node value of : "+temp.data);
+            int rightchild = sc.nextInt();
+
+            if(rightchild!= -1) {
+                temp.right = new Node5(rightchild);
+                q.add(temp.right);
+            }
+        }
+
+    }
+    
+    
+    psvm (){
+        buildfromlevelorder(null);
+   }
+      

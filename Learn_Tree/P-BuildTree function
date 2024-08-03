@@ -1,0 +1,43 @@
+public static Node5 buildTree(Node5 root){
+        Scanner sc = new Scanner(System.in);
+        System.out.println("Enter data for root");
+        int d = sc.nextInt();
+        root = new Node5(d);
+
+        if(d== -1 ) return null;
+        System.out.println("Enter data for left root of"+d);
+        root.left = buildTree(root.left);
+        System.out.println("Enter data for right root of"+d);
+        root.right = buildTree(root.right);
+        return root;
+
+    }
+    public static void main(String[] args) {
+    
+    
+    
+    
+          root = buildTree(null);
+          
+          
+          
+          
+//        Node5 root = new Node5(1);
+//        Node5 node1 = new Node5(2);
+//        Node5 node2 = new Node5(3);
+//        Node5 node3 = new Node5(6);
+//        Node5 node4 = new Node5(7);
+//        root.left=node1;
+//        root.right=node2;
+//        node1.right=node3;
+//        node3.left = node4;
+
+//        Node5 root = null;
+          
+//
+//        levelDusra(root);
+
+//        buildfromlevelorder(null);
+
+
+    }

@@ -1,0 +1,27 @@
+class Solution {
+    int sum=0;
+    public int findTilt(TreeNode root) {
+        solve(root);
+        return sum;
+        
+
+    }
+    public int solve(TreeNode root){
+        if(root==null) return 0;
+        if(root.left==null && root.right==null){
+            int m=root.val;
+            root.val=0;
+            return m;
+        }
+        
+        int left = solve(root.left);
+        int right= solve(root.right);
+
+        int m = Math.abs(left-right);
+        int n = root.val;
+        root.val=m;
+        sum+=root.val;
+        return n+left+right;
+    }
+
+}

@@ -1,0 +1,104 @@
+/**
+ * Definition for a binary tree node.
+ * public class TreeNode {
+ *     int val;
+ *     TreeNode left;
+ *     TreeNode right;
+ *     TreeNode() {}
+ *     TreeNode(int val) { this.val = val; }
+ *     TreeNode(int val, TreeNode left, TreeNode right) {
+ *         this.val = val;
+ *         this.left = left;
+ *         this.right = right;
+ *     }
+ * }
+ */
+
+//O(N^2)
+class Solution {
+    public boolean isBalanced(TreeNode root) {
+        if(root==null){
+            return true;
+        }
+
+        boolean left = isBalanced(root.left);
+        boolean right = isBalanced(root.right);
+        int m = dept(root.left);
+        int n = dept(root.right);
+        
+
+        if(left && right && Math.abs(m-n)<=1) return true;
+        return false;
+        
+        
+    }
+    public int dept(TreeNode root){
+        if(root==null) return 0;
+        return Math.max(dept(root.left),dept(root.right))+1;
+    }
+}
+
+
+
+//O(N)
+class Solution {
+    public boolean isBalanced(TreeNode root) {
+        if(root==null){
+            return true;
+        }
+
+        boolean left = isBalanced(root.left);
+        boolean right = isBalanced(root.right);
+        int m = dept(root.left);
+        int n = dept(root.right);
+        
+
+        if(left && right && Math.abs(m-n)<=1) return true;
+        return false;
+    }
+    public int dept(TreeNode root){
+        if(root==null) return 0;
+        int lh = dept(root.left);
+        int rh = dept(root.right);
+
+        if(lh== -1 || rh == -1) return -1;
+        if(Math.abs(lh-rh) >1) return -1;
+        return Math.max(lh,rh)+1;
+    }
+
+
+
+
+//O(N)
+
+class Solution {
+    public boolean isBalanced(TreeNode root) {
+        return solve(root).getKey();
+        
+        
+    }
+   
+    public Pair<Boolean,Integer> solve(TreeNode root){
+        if(root==null){
+            Pair<Boolean,Integer> p = new Pair<>(true,0);
+            return p;
+        }
+
+        Pair<Boolean,Integer> left = solve(root.left);
+        Pair<Boolean,Integer> right = solve(root.right);
+
+        Boolean leftans=left.getKey();
+        Boolean rightans=right.getKey();
+        
+        Boolean ans = Math.abs(left.getValue()-right.getValue())<=1;
+        if(leftans && rightans && ans){
+            Pair<Boolean,Integer> an= new Pair (true,Math.max(left.getValue(),right.getValue())+1);
+            return an;
+
+        }
+        Pair<Boolean,Integer> ns= new Pair (false,Math.max(left.getValue(),right.getValue())+1);
+        return ns;
+        
+
+    }
+}

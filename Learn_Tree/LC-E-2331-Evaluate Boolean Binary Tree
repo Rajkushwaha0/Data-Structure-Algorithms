@@ -1,0 +1,31 @@
+class Solution {
+    public boolean evaluateTree(TreeNode root) {
+        if(root.left==null && root.right==null){
+            if(root.val==0) return false;
+            return true;
+        }
+        
+        Boolean left = evaluateTree(root.left);
+        Boolean right = evaluateTree(root.right);
+        //AND
+        if(left==true && right==true && root.val==3){
+            return true;
+        }
+        if((left==false || right==false) && root.val==3){
+            return false;
+        }
+
+        //OR
+        if(left==true && right==true && root.val==2){
+            return true;
+        }
+        if((left==true || right==true) && root.val==2){
+            return true;
+        }
+        if(left==false && right==false && root.val==2){
+            return false;
+        }
+        return true;
+        
+    }
+}
