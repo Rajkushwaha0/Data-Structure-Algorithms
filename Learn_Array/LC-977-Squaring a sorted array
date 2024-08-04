@@ -1,0 +1,33 @@
+//O(N)   O(N)
+
+class Solution {
+    public int[] sortedSquares(int[] nums) {
+        int [] b= new int[nums.length];
+        int i=0;
+        int j = nums.length-1;
+        int k = nums.length-1;
+        int ls=0,rs=0;
+        while(i<=j){
+            ls=nums[i]*nums[i];
+            rs=nums[j]*nums[j];
+            if(ls>rs){
+                b[k]=ls;
+                k--;
+                i++;
+            }
+            else{
+                b[k]=rs;
+                k--;
+                j--;
+            }
+        }
+        return b;
+        
+    }
+}
+        
+        
+        
+ //O(NLOGN)
+ Just square each element in array
+And use Arrays.sort()
