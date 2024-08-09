@@ -1,3 +1,5 @@
+O(9+ (N-3*M-3))
+O(1)
 class Solution {
     public int numMagicSquaresInside(int[][] grid) {
         int count=0;
