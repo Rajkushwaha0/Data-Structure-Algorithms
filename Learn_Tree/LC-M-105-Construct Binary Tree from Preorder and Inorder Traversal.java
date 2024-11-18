@@ -34,28 +34,25 @@ class Solution {
 //Using MAP more optimize
 class Solution {
     public TreeNode buildTree(int[] preorder, int[] inorder) {
-        int n=inorder.length;
+        int n = preorder.length;
+        if(n!=inorder.length) return null;
         HashMap<Integer,Integer> map = new HashMap<>();
         for(int i=0;i<n;i++){
             map.put(inorder[i],i);
         }
-        return solve(preorder,inorder,0,n-1,map);
-        
+        return solve(preorder,0,n-1,map,n);
     }
-    int index=0;
-    public TreeNode solve(int[] preorder , int[] inorder  , int s , int e,HashMap<Integer,Integer> map){
-        if(s>e){
+    int i=0;
+    public TreeNode solve(int[] pre , int start , int end, HashMap<Integer,Integer>map,int n){
+        if(start>end || i>=n){
             return null;
         }
-
-        int data = preorder[index++];
-        TreeNode root = new TreeNode(data);
+        int data = pre[i++];
         int position = map.get(data);
+        TreeNode root = new TreeNode(data);
 
-        root.left=solve(preorder,inorder,s,position-1,map);
-        root.right=solve(preorder,inorder,position+1,e,map);
+        root.left = solve(pre,start,position-1,map,n);
+        root.right = solve(pre,position+1,end,map,n);
         return root;
-
-
     }
 }
