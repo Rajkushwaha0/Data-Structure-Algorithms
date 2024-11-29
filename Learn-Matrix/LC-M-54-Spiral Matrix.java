@@ -1,58 +1,51 @@
-O(N)
-O(1)  
+//O(N*M)
+//O(1)
 class Solution {
     public List<Integer> spiralOrder(int[][] matrix) {
-        int[][] direc = new int[][]{{0,1},{1,0},{0,-1},{-1,0}};
         List<Integer> ans = new ArrayList<>();
+        int[][] direc = new int[][]{{0,1},{1,0},{0,-1},{-1,0}};
+        int row = matrix.length;
+        int col = matrix[0].length;
         int count=0;
-        int dir = 0;
-        int rows = matrix.length;
-        int cols = matrix[0].length;
-        int i=0;
-        int j=0;
-        int n=rows;
-        int m=cols;
-        int p=0;
-        int q=0;
-        while(count < rows*cols){
-            while(i>=p && i<n && j>=q && j<m){
+        int p=0;// boundary for upper row(already visited)
+        int q=0; // boundary for left col (already visited)
+        int i=0;//indexes
+        int j=0;//indexes
+        int dir=0; //i index for direction j will be 0/1
+        int totalLoop = row*col;
+        while(count < totalLoop){ //for all element should travers
+            while(i>=p && i<row && j<col && j>=q){
                 ans.add(matrix[i][j]);
-                i+= direc[dir][0];
+                i+=direc[dir][0];
                 j+=direc[dir][1];
                 count++;
             }
-            if(i<p){
+            if(j>=col){
+                i++;
+                j--;
+                dir=1;
+            }else if(i>=row){
+                i--;
+                j--;
+                dir=2;
+            }else if(j<q){
+                i--;
+                j++;
+                dir=3;
+            }else{
                 i++;
                 j++;
                 dir=0;
             }
-            else if(i>=n){
-                i--;
-                j--;
-                dir=2;
-            }
-            else if(j<q){
-                j++;
-                i--;
-                dir=3;
-            }
-            else if(j>=m){
-                i++;
-                j--;
-                dir=1;
-            }
 
-            if(dir==0){
-                q++;
-            }
-            else if(dir==1){
+            if(dir==1){
                 p++;
-            }
-            else if(dir==2){
-                m--;
-            }
-            else if(dir==3){
-                n--;
+            }else if(dir==2){
+                col--;
+            }else if(dir==3){
+                row--;
+            }else{
+                q++;
             }
         }
         return ans;
