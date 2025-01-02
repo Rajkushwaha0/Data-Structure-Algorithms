@@ -1,3 +1,5 @@
+//O(n+m)
+//O(5) -> O(1)
 class Solution {
     public int[] vowelStrings(String[] words, int[][] queries) {
         HashSet<Character> hs = new HashSet<>();
