@@ -1,44 +1,43 @@
-O(log N)
-O(1)
+// tc: O(log n)
+//sc: O(1)
 class Solution {
-    public int findKRotation(List<Integer> arr) {
+    public int findKRotation(int arr[]) {
         // Code here
-        int s=0;
-        int e=arr.size()-1;
-        int ans = Integer.MAX_VALUE;   //this track for minimum value
-        int index = 0;  //this track for index which has small value
+        int n = arr.length;
+        int s = 0;
+        int e = n-1;
+            
+        int ans = Integer.MAX_VALUE;
+        int value = Integer.MAX_VALUE;
         while(s<=e){
-            int mid = (s+e)/2;
-            int start = arr.get(s);
-            int midValue = arr.get(mid);
-            int end = arr.get(e);
-
-          //this checks for wheather we have found the unsorted one not
-            if(start<=end){
-                if(start<ans){
-                    ans=start;
-                    index=s;
+            int mid = s + (e-s)/2;
+            
+            // if(arr[s]<=arr[mid] && arr[mid]<=arr[e]){
+            //   if(arr[s]<=value){
+            //     ans = s;
+            //     value=arr[s];
+            //   }
+            //   break;
+            // }
+            
+            if(arr[mid]<=arr[e]){
+                if(arr[mid]<value){
+                    ans = mid;
+                    value = arr[mid];
                 }
-                break;
+                e = mid-1;
             }
             
-            //eliminates left sorted
-            if(start<=midValue){
-                if(start<ans){
-                    index = s;
-                    ans=start;
+            if(arr[s]<=arr[mid]){
+                if(arr[s]<value){
+                    ans = s;
+                    value = arr[s];
                 }
-                s=mid+1;
+                s = mid+1;
             }
-            //eliminates right sorted
-            else if(midValue<=end){
-                if(midValue<ans){
-                    index=mid;
-                    ans=midValue;
-                }
-                e=mid-1;
-            }
+            
         }
-        return index;
+        
+        return ans;
     }
 }
